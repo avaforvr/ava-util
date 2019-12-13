@@ -1,0 +1,58 @@
+{{> comment}}
+
+{{#unless hideSources}}
+    {{> member.sources}}
+{{/unless}}
+
+{{#if typeParameters}}
+    <h4 class="tsd-type-parameters-title">Type parameters</h4>
+    {{> typeParameters}}
+{{/if}}
+
+{{#if parameters}}
+    <h4 class="tsd-parameters-title">Parameters</h4>
+    <table class="tsd-parameters">
+		{{#each parameters}}
+			<tr>
+				<td>
+					{{#compact}}
+						{{#each flags}}
+							<span class="tsd-flag ts-flag{{this}}">{{this}}</span>&nbsp;
+						{{/each}}
+						{{#if flags.isRest}}<span class="tsd-signature-symbol">...</span>{{/if}}
+						<strong>{{name}}:&nbsp;</strong>
+						{{#with type}}{{>type}}{{/with}}
+						{{#if defaultValue}}
+							<span class="tsd-signature-symbol">
+							&nbsp;=&nbsp;
+							{{defaultValue}}
+							</span>
+						{{/if}}
+					{{/compact}}
+				</td>
+				<td>
+					{{> comment}}
+					{{#if type.declaration}}
+						{{#with type.declaration}}
+							{{> parameter}}
+						{{/with}}
+					{{/if}}
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+{{/if}}
+
+{{#if type}}
+    <h4 class="tsd-returns-title">Returns {{#with type}}{{>type}}{{/with}}</h4>
+
+    {{#if comment.returns}}
+        {{#markdown}}{{{comment.returns}}}{{/markdown}}
+    {{/if}}
+
+    {{#if type.declaration}}
+        {{#with type.declaration}}
+            {{> parameter}}
+        {{/with}}
+    {{/if}}
+{{/if}}
