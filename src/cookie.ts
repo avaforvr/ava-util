@@ -29,12 +29,12 @@ function getDomain(): string {
 }
 
 /**
- * Set a cookie in browser.
+ *  a cookie in browser.
  * @param {string} name - Cookie's name.
  * @param {number | string} value - Cookie's value.
  * @param {number | CookieOption} options - Cookie's expires or other options.
  */
-export function setCookie(name: string, value: number | string, options: number | CookieOption = {}): boolean {
+export function set(name: string, value: number | string, options: number | CookieOption = {}): boolean {
     if (name.length === 0) {
         return false;
     }
@@ -98,7 +98,7 @@ export function setCookie(name: string, value: number | string, options: number 
  * Get cookie's value in brower.
  * @param {string} name - Cookie's name.
  */
-export function getCookie(name: string): string | undefined {
+export function get(name: string): string | undefined {
     let cookies: string = '';
     let cookie: string | undefined = void 0;
     try {
@@ -121,6 +121,6 @@ export function getCookie(name: string): string | undefined {
 }
 
 export default {
-    setCookie,
-    getCookie
+    set,
+    get
 };
