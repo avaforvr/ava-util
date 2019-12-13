@@ -64,7 +64,7 @@ export function setCookie(name: string, value: number | string, options: number 
         }
     }
 
-    let cookie = name + '=' + encodeURIComponent(value);
+    let cookie = name + '=' + encodeURIComponent(value + '');
     cookie += ';path=/';
 
     const expiresDate = new Date();
