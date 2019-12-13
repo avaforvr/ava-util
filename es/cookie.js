@@ -27,7 +27,7 @@ function getDomain() {
  * @param {number | string} value - Cookie's value.
  * @param {number | CookieOption} options - Cookie's expires or other options.
  */
-export function setCookie(name, value, options = {}) {
+export function set(name, value, options = {}) {
     if (name.length === 0) {
         return false;
     }
@@ -57,7 +57,7 @@ export function setCookie(name, value, options = {}) {
             secure = options.secure;
         }
     }
-    let cookie = name + '=' + encodeURIComponent(value);
+    let cookie = name + '=' + encodeURIComponent(value + '');
     cookie += ';path=/';
     const expiresDate = new Date();
     expiresDate.setTime(expiresDate.getTime() + (expires * 24 * 3600 * 1000));
@@ -86,7 +86,7 @@ export function setCookie(name, value, options = {}) {
  * Get cookie's value in brower.
  * @param {string} name - Cookie's name.
  */
-export function getCookie(name) {
+export function get(name) {
     let cookies = '';
     let cookie = void 0;
     try {
@@ -109,6 +109,6 @@ export function getCookie(name) {
     return cookie;
 }
 export default {
-    setCookie,
-    getCookie
+    set,
+    get
 };

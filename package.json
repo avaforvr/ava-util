@@ -5,6 +5,7 @@
     "main": "lib/index.js",
     "module": "es/index.js",
     "scripts": {
+        "build": "tsc && tsc --outDir lib --module commonjs && typedoc --out docs src --exclude src/index.ts --mode modules --theme ./typedoc-theme",
         "tsc": "tsc && tsc --outDir lib --module commonjs",
         "doc": "typedoc --out docs src --exclude src/index.ts --mode modules --theme ./typedoc-theme",
         "test": "jest",

@@ -6,8 +6,8 @@ declare const _default: {
         merge: typeof import("./data").merge;
     };
     cookie: {
-        setCookie: typeof import("./cookie").setCookie;
-        getCookie: typeof import("./cookie").getCookie;
+        set: typeof import("./cookie").set;
+        get: typeof import("./cookie").get;
     };
 };
 export default _default;

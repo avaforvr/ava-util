@@ -13,14 +13,14 @@ interface CookieOption {
  * @param {number | string} value - Cookie's value.
  * @param {number | CookieOption} options - Cookie's expires or other options.
  */
-export declare function setCookie(name: string, value: number | string, options?: number | CookieOption): boolean;
+export declare function set(name: string, value: number | string, options?: number | CookieOption): boolean;
 /**
  * Get cookie's value in brower.
  * @param {string} name - Cookie's name.
  */
-export declare function getCookie(name: string): string | undefined;
+export declare function get(name: string): string | undefined;
 declare const _default: {
-    setCookie: typeof setCookie;
-    getCookie: typeof getCookie;
+    set: typeof set;
+    get: typeof get;
 };
 export default _default;
