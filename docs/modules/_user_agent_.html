@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;user-agent&quot; | ava-util</title>
+	<title>&quot;user-agent&quot; | ava-util - v1.0.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">ava-util</a>
+					<a href="../index.html" class="title">ava-util - v1.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -71,42 +71,69 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_user_agent_.iparsedua.html" class="tsd-kind-icon">IParsed<wbr>Ua</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_user_agent_.iuafuncs.html" class="tsd-kind-icon">IUAFuncs</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_user_agent_.html#utilfunc" class="tsd-kind-icon">util<wbr>Func</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_user_agent_.html#clientkeytype" class="tsd-kind-icon">Client<wbr>Key<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_user_agent_.html#uaparsedmap" class="tsd-kind-icon">UAParsed<wbr>Map</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_user_agent_.html#uautilstype" class="tsd-kind-icon">UAUtils<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_user_agent_.html#utilfunc" class="tsd-kind-icon">Util<wbr>Func</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_user_agent_.html#client_keys" class="tsd-kind-icon">CLIENT_<wbr>KEYS</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_user_agent_.html#uautils" class="tsd-kind-icon">ua<wbr>Utils</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported"><a href="_user_agent_.html#regs" class="tsd-kind-icon">regs</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported"><a href="_user_agent_.html#client_regs" class="tsd-kind-icon">CLIENT_<wbr>REGS</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="utilfunc" class="tsd-anchor"></a>
-					<h3>util<wbr>Func</h3>
-					<div class="tsd-signature tsd-kind-icon">util<wbr>Func<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<a name="clientkeytype" class="tsd-anchor"></a>
+					<h3>Client<wbr>Key<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Client<wbr>Key<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlyArray[number]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in user-agent.ts:1</li>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L5">user-agent.ts:5</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="uaparsedmap" class="tsd-anchor"></a>
+					<h3>UAParsed<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">UAParsed<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="_user_agent_.html#clientkeytype" class="tsd-signature-type">ClientKeyType</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L7">user-agent.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="uautilstype" class="tsd-anchor"></a>
+					<h3>UAUtils<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">UAUtils<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="_user_agent_.html#clientkeytype" class="tsd-signature-type">ClientKeyType</a><span class="tsd-signature-symbol">, </span><a href="_user_agent_.html#utilfunc" class="tsd-signature-type">UtilFunc</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L9">user-agent.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="utilfunc" class="tsd-anchor"></a>
+					<h3>Util<wbr>Func</h3>
+					<div class="tsd-signature tsd-kind-icon">Util<wbr>Func<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L1">user-agent.ts:1</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -137,13 +164,23 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="client_keys" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> CLIENT_<wbr>KEYS</h3>
+					<div class="tsd-signature tsd-kind-icon">CLIENT_<wbr>KEYS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;isPhone&#x27;, &#x27;isTablet&#x27;, &#x27;isMobile&#x27;, &#x27;isIOS&#x27;, &#x27;isAndroid&#x27;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L3">user-agent.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="uautils" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> ua<wbr>Utils</h3>
-					<div class="tsd-signature tsd-kind-icon">ua<wbr>Utils<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_user_agent_.iuafuncs.html" class="tsd-signature-type">IUAFuncs</a><span class="tsd-signature-symbol"> =&nbsp;Object.create(null)</span></div>
+					<div class="tsd-signature tsd-kind-icon">ua<wbr>Utils<span class="tsd-signature-symbol">:</span> <a href="_user_agent_.html#uautilstype" class="tsd-signature-type">UAUtilsType</a><span class="tsd-signature-symbol"> =&nbsp;Object.create(null)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in user-agent.ts:28</li>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L22">user-agent.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -151,61 +188,61 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Object literals</h2>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="regs" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> regs</h3>
-					<div class="tsd-signature tsd-kind-icon">regs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="client_regs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> CLIENT_<wbr>REGS</h3>
+					<div class="tsd-signature tsd-kind-icon">CLIENT_<wbr>REGS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in user-agent.ts:20</li>
+							<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L14">user-agent.ts:14</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="regs.isandroid" class="tsd-anchor"></a>
+						<a name="client_regs.isandroid" class="tsd-anchor"></a>
 						<h3>is<wbr>Android</h3>
 						<div class="tsd-signature tsd-kind-icon">is<wbr>Android<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;/Android/i</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in user-agent.ts:25</li>
+								<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L19">user-agent.ts:19</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="regs.isios" class="tsd-anchor"></a>
+						<a name="client_regs.isios" class="tsd-anchor"></a>
 						<h3>isIOS</h3>
 						<div class="tsd-signature tsd-kind-icon">isIOS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;/(iPhone|iPad|iPod|iOS)/i</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in user-agent.ts:24</li>
+								<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L18">user-agent.ts:18</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="regs.ismobile" class="tsd-anchor"></a>
+						<a name="client_regs.ismobile" class="tsd-anchor"></a>
 						<h3>is<wbr>Mobile</h3>
 						<div class="tsd-signature tsd-kind-icon">is<wbr>Mobile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;/(iPad|iPhone|iPod|Android|ios|Windows Phone)/i</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in user-agent.ts:23</li>
+								<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L17">user-agent.ts:17</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="regs.isphone" class="tsd-anchor"></a>
+						<a name="client_regs.isphone" class="tsd-anchor"></a>
 						<h3>is<wbr>Phone</h3>
 						<div class="tsd-signature tsd-kind-icon">is<wbr>Phone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;/(iPhone|iPod|Android|BlackBerry|SymbianOS|Windows Phone|ZuneWP7|webOS)/i</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in user-agent.ts:21</li>
+								<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L15">user-agent.ts:15</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="regs.istablet" class="tsd-anchor"></a>
+						<a name="client_regs.istablet" class="tsd-anchor"></a>
 						<h3>is<wbr>Tablet</h3>
 						<div class="tsd-signature tsd-kind-icon">is<wbr>Tablet<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;/iPad/i</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in user-agent.ts:22</li>
+								<li>Defined in <a href="https://github.com/avaforvr/ava-util/blob/1b41bde/src/user-agent.ts#L16">user-agent.ts:16</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -219,20 +256,26 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_user_agent_.iparsedua.html" class="tsd-kind-icon">IParsed<wbr>Ua</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_user_agent_.html#clientkeytype" class="tsd-kind-icon">Client<wbr>Key<wbr>Type</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_user_agent_.iuafuncs.html" class="tsd-kind-icon">IUAFuncs</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_user_agent_.html#uaparsedmap" class="tsd-kind-icon">UAParsed<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_user_agent_.html#uautilstype" class="tsd-kind-icon">UAUtils<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_user_agent_.html#utilfunc" class="tsd-kind-icon">util<wbr>Func</a>
+						<a href="_user_agent_.html#utilfunc" class="tsd-kind-icon">Util<wbr>Func</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_user_agent_.html#client_keys" class="tsd-kind-icon">CLIENT_<wbr>KEYS</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_user_agent_.html#uautils" class="tsd-kind-icon">ua<wbr>Utils</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_user_agent_.html#regs" class="tsd-kind-icon">regs</a>
+						<a href="_user_agent_.html#client_regs" class="tsd-kind-icon">CLIENT_<wbr>REGS</a>
 					</li>
 				</ul>
 			</nav>
