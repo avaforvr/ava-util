@@ -34,7 +34,7 @@ function getDomain(): string {
  * @param {number | string} value - Cookie's value.
  * @param {number | CookieOption} options - Cookie's expires or other options.
  */
-export function set(name: string, value: number | string, options: number | CookieOption = {}): boolean {
+export function setCookie(name: string, value: number | string, options: number | CookieOption = {}): boolean {
     if (name.length === 0) {
         return false;
     }
@@ -88,7 +88,7 @@ export function set(name: string, value: number | string, options: number | Cook
     try {
         document.cookie = cookie;
         return true;
-    } catch (e) {
+    } catch (err) {
         console.log('cookie is disabled');
         return false;
     }
@@ -98,12 +98,12 @@ export function set(name: string, value: number | string, options: number | Cook
  * Get cookie's value in brower.
  * @param {string} name - Cookie's name.
  */
-export function get(name: string): string | undefined {
+export function getCookie(name: string): string | undefined {
     let cookies: string = '';
     let cookie: string | undefined = void 0;
     try {
         cookies = document.cookie;
-    } catch {
+    } catch (err) {
         /* istanbul ignore next */
         console.log('cookie is disabled');
     }
@@ -121,6 +121,6 @@ export function get(name: string): string | undefined {
 }
 
 export default {
-    set,
-    get
+    set: setCookie,
+    get: getCookie
 };

@@ -1,4 +1,4 @@
-import { isJson, getDataType, clone, merge } from '../src/data';
+import { isJson, getDataType, clone, merge, parseJson, jsonToCamel, jsonToUnder } from '../src/data';
 
 const TYPES = {
     number: 123,
@@ -8,6 +8,28 @@ const TYPES = {
     null: null,
     array: ['abcd'],
     json: { abc: 'abcd' }
+};
+
+const camelObj = {
+    aA: 1,
+    bB: [
+        {
+            cC: {
+                dD: 1
+            }
+        }
+    ]
+};
+
+const underObj = {
+    a_a: 1,
+    b_b: [
+        {
+            c_c: {
+                d_d: 1
+            }
+        }
+    ]
 };
 
 describe('test data.js', () => {
@@ -49,9 +71,8 @@ describe('test data.js', () => {
         it('clone not array and not json', () => {
             Object.keys(TYPES).forEach((type) => {
                 if (type !== 'array' && type !== 'json') {
-                    let origin = TYPES[type];
+                    const origin = TYPES[type];
                     const cloned = clone(origin);
-                    origin = 'whatever';
                     expect(cloned).toBe(TYPES[type]);
                 }
             });
@@ -91,7 +112,9 @@ describe('test data.js', () => {
             if (type === 'json') {
                 expected.g = origin.g;
                 for (const key in TYPES.json) {
-                    expected.g[key] = TYPES.json[key];
+                    if (Object.prototype.hasOwnProperty.call(TYPES.json, key)) {
+                        expected.g[key] = TYPES.json[key];
+                    }
                 }
             }
 
@@ -127,6 +150,47 @@ describe('test data.js', () => {
                 }
             };
             expect(merged).toEqual(expected);
+        });
+    });
+
+    describe('parseJson', () => {
+        const wrongTypes = {
+            boolean: true,
+            undefined: undefined,
+            null: null,
+            array: ['abcd'],
+            number: 123
+        };
+
+        it('Check Json object', () => {
+            expect(parseJson({ abc: 'abcd' })).toStrictEqual({ abc: 'abcd' });
+        });
+        it('Check valid string', () => {
+            expect(parseJson('{"abc":"abcd"}')).toStrictEqual({ abc: 'abcd' });
+        });
+        it('Check invalid string', () => {
+            expect(() => {
+                parseJson('{abc:"abcd"}');
+            }).toThrowError('Illegal json format: {abc:"abcd"}');
+        });
+
+        Object.keys(wrongTypes).forEach((type) => {
+            const val = wrongTypes[type];
+            it(val + ' should throw TypeError', () => {
+                expect(() => {
+                    parseJson(val);
+                }).toThrowError(new TypeError(`Parameter can only be string or json: ${val}`));
+            });
+        });
+    });
+
+    describe('test json.ts', () => {
+        it('Check jsonToCamel', () => {
+            expect(jsonToCamel(underObj)).toStrictEqual(camelObj);
+        });
+
+        it('Check jsonToUnder', () => {
+            expect(jsonToUnder(camelObj)).toStrictEqual(underObj);
         });
     });
 });

@@ -2,11 +2,9 @@
     "name": "ava-util",
     "version": "1.0.0",
     "description": "Native javascript utils library.",
-    "main": "lib/index.js",
-    "module": "es/index.js",
+    "main": "dist/index.js",
     "scripts": {
-        "build": "tsc && tsc --outDir lib --module commonjs && typedoc --out docs src --exclude src/index.ts --mode modules --theme ./typedoc-theme",
-        "tsc": "tsc && tsc --outDir lib --module commonjs",
+        "build": "tsc",
         "doc": "typedoc --out docs src --exclude src/index.ts --mode modules --theme ./typedoc-theme",
         "test": "jest",
         "lint": "eslint --ext .ts,.js ./",
@@ -14,19 +12,14 @@
         "lint-staged": "lint-staged"
     },
     "files": [
-        "es",
-        "lib"
+        "dist"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/avaforvr/ava-util.git"
+        "url": "https://g.gitvv.com/frontend/ava-util.git"
     },
-    "author": "avaforvr",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/avaforvr/ava-util/issues"
-    },
-    "homepage": "https://github.com/avaforvr/ava-util#readme",
+    "author": "yywang1",
+    "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.7.5",
         "@babel/preset-env": "^7.7.6",
@@ -41,7 +34,7 @@
         "eslint-plugin-node": "^10.0.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
-        "husky": "^3.1.0",
+        "husky": "^7.0.2",
         "jest": "^24.9.0",
         "lint-staged": "^9.5.0",
         "typedoc": "^0.15.4",
