@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
+exports.filterJson = exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
 var string_1 = require("./string");
 /**
  * 判断传入的参数是不是JSON对象
@@ -145,6 +145,25 @@ function jsonToUnder(source) {
     return trans(source, 'under');
 }
 exports.jsonToUnder = jsonToUnder;
+/**
+ * 过滤空数据
+ * @param o
+ */
+function filterJson(o) {
+    for (var key in o) {
+        if (o[key] === null) {
+            delete o[key];
+        }
+        else if (getDataType(o[key]) === 'string') {
+            o[key] = o[key].trim();
+        }
+        else if (getDataType(o[key]) === 'object' || getDataType(o[key]) === 'array') {
+            o[key] = filterJson(o[key]);
+        }
+    }
+    return o;
+}
+exports.filterJson = filterJson;
 exports.default = {
     isJson: isJson,
     parseJson: parseJson,
@@ -152,5 +171,6 @@ exports.default = {
     clone: clone,
     merge: merge,
     jsonToCamel: jsonToCamel,
-    jsonToUnder: jsonToUnder
+    jsonToUnder: jsonToUnder,
+    filterJson: filterJson
 };

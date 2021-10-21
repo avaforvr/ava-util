@@ -1,4 +1,4 @@
-import { camelToUnder, underToCamel } from './string';
+import {camelToUnder, underToCamel} from './string';
 
 /**
  * 判断传入的参数是不是JSON对象
@@ -35,7 +35,6 @@ export function getDataType(param: any): string {
  * 深度克隆数组或对象
  * @param origin: 要克隆的对象
  */
-
 export function clone<T>(origin: T): T {
     let cloned: any;
     const type = getDataType(origin);
@@ -109,7 +108,7 @@ function trans(source: any, format: 'camel' | 'under'): any {
         return source.map(v => trans(v, format));
     } else if (isJson(source)) {
         const result = {};
-        Object.keys(source).forEach(function(key) {
+        Object.keys(source).forEach(function (key) {
             var newKey = format === 'camel' ? underToCamel(key) : camelToUnder(key);
             result[newKey] = trans(source[key], format);
         });
@@ -134,6 +133,23 @@ export function jsonToUnder<T>(source: T): T {
     return trans(source, 'under');
 }
 
+/**
+ * 过滤空数据
+ * @param o
+ */
+export function filterJson(o: Record<string | number, any>): Record<string | number, any> {
+    for (const key in o) {
+        if (o[key] === null) {
+            delete o[key];
+        } else if (getDataType(o[key]) === 'string') {
+            o[key] = o[key].trim();
+        } else if (getDataType(o[key]) === 'object' || getDataType(o[key]) === 'array') {
+            o[key] = filterJson(o[key]);
+        }
+    }
+    return o;
+}
+
 export default {
     isJson,
     parseJson,
@@ -141,5 +157,6 @@ export default {
     clone,
     merge,
     jsonToCamel,
-    jsonToUnder
+    jsonToUnder,
+    filterJson
 };

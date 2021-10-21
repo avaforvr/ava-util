@@ -34,6 +34,11 @@ export declare function jsonToCamel<T>(source: T): T;
  * @param source 源对象
  */
 export declare function jsonToUnder<T>(source: T): T;
+/**
+ * 过滤空数据
+ * @param o
+ */
+export declare function filterJson(o: Record<string | number, any>): Record<string | number, any>;
 declare const _default: {
     isJson: typeof isJson;
     parseJson: typeof parseJson;
@@ -42,5 +47,6 @@ declare const _default: {
     merge: typeof merge;
     jsonToCamel: typeof jsonToCamel;
     jsonToUnder: typeof jsonToUnder;
+    filterJson: typeof filterJson;
 };
 export default _default;
