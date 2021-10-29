@@ -19,8 +19,14 @@ export declare function setCookie(name: string, value: number | string, options?
  * @param {string} name - Cookie's name.
  */
 export declare function getCookie(name: string): string | undefined;
+/**
+ * Delete cookie
+ * @param {string} name - Cookie's name.
+ */
+export declare function delCookie(name: string): void;
 declare const _default: {
     set: typeof setCookie;
     get: typeof getCookie;
+    del: typeof delCookie;
 };
 export default _default;

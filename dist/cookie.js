@@ -4,7 +4,7 @@
  * @author yywang1
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCookie = exports.setCookie = void 0;
+exports.delCookie = exports.getCookie = exports.setCookie = void 0;
 /**
  * Get domain for cookie.
  * @ignore
@@ -114,7 +114,16 @@ function getCookie(name) {
     return cookie;
 }
 exports.getCookie = getCookie;
+/**
+ * Delete cookie
+ * @param {string} name - Cookie's name.
+ */
+function delCookie(name) {
+    setCookie(name, '', -1);
+}
+exports.delCookie = delCookie;
 exports.default = {
     set: setCookie,
-    get: getCookie
+    get: getCookie,
+    del: delCookie
 };

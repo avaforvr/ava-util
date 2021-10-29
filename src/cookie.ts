@@ -120,7 +120,16 @@ export function getCookie(name: string): string | undefined {
     return cookie;
 }
 
+/**
+ * Delete cookie
+ * @param {string} name - Cookie's name.
+ */
+export function delCookie(name: string): void {
+    setCookie(name, '', -1);
+}
+
 export default {
     set: setCookie,
-    get: getCookie
+    get: getCookie,
+    del: delCookie
 };
