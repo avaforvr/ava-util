@@ -1,10 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isSupportWebp = void 0;
 /**
  * 判断是否支持webp
  */
-export function isSupportWebp() {
+function isSupportWebp() {
     var canvas = document.createElement('canvas');
     return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
 }
-export default {
+exports.isSupportWebp = isSupportWebp;
+exports.default = {
     isSupportWebp: isSupportWebp
 };

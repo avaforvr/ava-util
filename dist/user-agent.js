@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var CLIENT_KEYS = ['isPhone', 'isTablet', 'isMobile', 'isIOS', 'isAndroid'];
 var CLIENT_REGS = {
     isPhone: /(iPhone|iPod|Android|BlackBerry|SymbianOS|Windows Phone|ZuneWP7|webOS)/i,
@@ -46,4 +48,4 @@ uaUtils.getAppVersion = function (userAgent) {
     }
     return '';
 };
-export default uaUtils;
+exports.default = uaUtils;

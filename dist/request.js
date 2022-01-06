@@ -13,7 +13,7 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generatePath = exports.getHash = exports.getSearch = exports.getPathname = exports.updateSearch = exports.getParamInSearch = exports.getParamsInSearch = void 0;
 var path_to_regexp_1 = require("path-to-regexp");
-var query_string_1 = require("query-string");
+var qs = require("query-string");
 var qsOptions = { arrayFormat: 'bracket' };
 /**
  * 获取 url 中的参数并解析成对象
@@ -23,7 +23,7 @@ function getParamsInSearch(search) {
     if (search === void 0) {
         search = typeof window !== 'undefined' ? window.location.search : '';
     }
-    return query_string_1.default.parse(search, qsOptions);
+    return qs.parse(search, qsOptions);
 }
 exports.getParamsInSearch = getParamsInSearch;
 /**
@@ -43,8 +43,8 @@ exports.getParamInSearch = getParamInSearch;
  */
 function updateSearch(obj, search) {
     if (search === void 0) { search = ''; }
-    var merged = __assign(__assign({}, query_string_1.default.parse(search, qsOptions)), obj);
-    return "?" + query_string_1.default.stringify(merged, qsOptions);
+    var merged = __assign(__assign({}, qs.parse(search, qsOptions)), obj);
+    return "?" + qs.stringify(merged, qsOptions);
 }
 exports.updateSearch = updateSearch;
 /**

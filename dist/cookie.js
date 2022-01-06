@@ -1,7 +1,10 @@
+"use strict";
 /**
  * 设置和获取cookie
  * @author yywang1
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.delCookie = exports.getCookie = exports.setCookie = void 0;
 /**
  * Get domain for cookie.
  * @ignore
@@ -27,7 +30,7 @@ function getDomain() {
  * @param {number | string} value - Cookie's value.
  * @param {number | CookieOption} options - Cookie's expires or other options.
  */
-export function setCookie(name, value, options) {
+function setCookie(name, value, options) {
     if (options === void 0) { options = {}; }
     if (name.length === 0) {
         return false;
@@ -83,11 +86,12 @@ export function setCookie(name, value, options) {
         return false;
     }
 }
+exports.setCookie = setCookie;
 /**
  * Get cookie's value in brower.
  * @param {string} name - Cookie's name.
  */
-export function getCookie(name) {
+function getCookie(name) {
     var cookies = '';
     var cookie = void 0;
     try {
@@ -109,14 +113,16 @@ export function getCookie(name) {
     }
     return cookie;
 }
+exports.getCookie = getCookie;
 /**
  * Delete cookie
  * @param {string} name - Cookie's name.
  */
-export function delCookie(name) {
+function delCookie(name) {
     setCookie(name, '', -1);
 }
-export default {
+exports.delCookie = delCookie;
+exports.default = {
     set: setCookie,
     get: getCookie,
     del: delCookie

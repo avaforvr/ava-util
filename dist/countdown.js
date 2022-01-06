@@ -1,3 +1,4 @@
+"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -9,7 +10,9 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import intervalExecuter from './interval-executer';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addCountdown = exports.initCountdown = void 0;
+var interval_executer_1 = require("./interval-executer");
 var state = {
     nowTime: 0,
     items: [],
@@ -103,9 +106,9 @@ var run = function () {
     // items 清空后停止循环
     return state.items.length > 0;
 };
-var executer = intervalExecuter(run, 1000);
+var executer = interval_executer_1.default(run, 1000);
 // 设置当前时间戳
-export var initCountdown = function (nowTime, textConfig) {
+exports.initCountdown = function (nowTime, textConfig) {
     // 初始化仅执行一次
     if (state.nowTime > 0 || nowTime <= 0) {
         return;
@@ -118,7 +121,7 @@ export var initCountdown = function (nowTime, textConfig) {
     }
     defaultItemConfig = __assign({ endTime: 0, isShowDay: false, render: function (o) { return o.hour + ":" + o.minute + ":" + o.second; } }, textConfig);
 };
-export var addCountdown = function (container, config) {
+exports.addCountdown = function (container, config) {
     if (config.endTime > 0) {
         var items = state.items;
         // 判断 container 是否已经在列表中
