@@ -1,6 +1,20 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUrl = exports.updateSearch = exports.getParamInSearch = exports.getParamsInSearch = void 0;
+exports.generatePath = exports.getHash = exports.getSearch = exports.getPathname = exports.updateSearch = exports.getParamInSearch = exports.getParamsInSearch = void 0;
+var path_to_regexp_1 = require("path-to-regexp");
+var query_string_1 = require("query-string");
+var qsOptions = { arrayFormat: 'bracket' };
 /**
  * 获取 url 中的参数并解析成对象
  * @param search 待解析search
@@ -9,15 +23,7 @@ function getParamsInSearch(search) {
     if (search === void 0) {
         search = typeof window !== 'undefined' ? window.location.search : '';
     }
-    var params = {};
-    if (search.indexOf('?') !== -1) {
-        var str = search.substr(1);
-        var strs = str.split('&');
-        for (var i = 0; i < strs.length; i++) {
-            params[strs[i].split('=')[0]] = decodeURIComponent(strs[i].split('=')[1]);
-        }
-    }
-    return params;
+    return query_string_1.default.parse(search, qsOptions);
 }
 exports.getParamsInSearch = getParamsInSearch;
 /**
@@ -36,28 +42,27 @@ exports.getParamInSearch = getParamInSearch;
  * @param search search
  */
 function updateSearch(obj, search) {
-    var params = getParamsInSearch(search);
-    for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            params[key] = encodeURIComponent(obj[key]);
-        }
-    }
-    var newSearch = '';
-    for (var key in params) {
-        if (Object.prototype.hasOwnProperty.call(params, key)) {
-            newSearch += (newSearch === '' ? '?' : '&') + (key + '=' + params[key]);
-        }
-    }
-    return newSearch;
+    if (search === void 0) { search = ''; }
+    var merged = __assign(__assign({}, query_string_1.default.parse(search, qsOptions)), obj);
+    return "?" + query_string_1.default.stringify(merged, qsOptions);
 }
 exports.updateSearch = updateSearch;
-function getClearUrl(url) {
+/**
+ * 获取 pathname
+ * @param url
+ */
+function getPathname(url) {
     if (url.includes('?') || url.includes('#')) {
         var matched = url.match(/^.*?(?=[?|#])/);
         return matched[0];
     }
     return url;
 }
+exports.getPathname = getPathname;
+/**
+ * 获取 search
+ * @param url
+ */
 function getSearch(url) {
     var search = '';
     if (url.includes('?')) {
@@ -66,6 +71,11 @@ function getSearch(url) {
     }
     return search === '?' ? '' : search;
 }
+exports.getSearch = getSearch;
+/**
+ * 获取 hash
+ * @param url
+ */
 function getHash(url) {
     var hash = '';
     if (url.includes('#')) {
@@ -74,8 +84,31 @@ function getHash(url) {
     }
     return hash;
 }
-function updateUrl(obj, url) {
-    url = url === void 0 ? (typeof window !== 'undefined' ? window.location.href : '') : url;
-    return getClearUrl(url) + updateSearch(obj, getSearch(url)) + getHash(url);
+exports.getHash = getHash;
+/**
+ * 生成完整路径
+ * @param url url
+ * @param params 动态路由参数
+ * @param query query
+ */
+function generatePath(url, params, query) {
+    if (typeof url !== 'string') {
+        params = url;
+        url = typeof window !== 'undefined' ? window.location.href.replace(/^\w*:\/\/.*?\//, '/') : '';
+    }
+    var pathname = getPathname(url);
+    var search = getSearch(url);
+    if (pathname.includes(':') && params) {
+        // 动态路由变量替换
+        pathname = path_to_regexp_1.compile(pathname, { encode: encodeURIComponent })(params);
+    }
+    else {
+        // 非动态路由，第二个参数作为 query 使用
+        query = params;
+    }
+    if (query) {
+        search = updateSearch(query, search);
+    }
+    return pathname + search + getHash(url);
 }
-exports.updateUrl = updateUrl;
+exports.generatePath = generatePath;
