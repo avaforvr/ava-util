@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var requestAnimFrame = (function () {
     if (typeof window === 'undefined') {
         return null;
@@ -49,4 +47,4 @@ function intervalExecuter(callback, interval) {
         }
     };
 }
-exports.default = intervalExecuter;
+export default intervalExecuter;

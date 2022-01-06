@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.loadScript = void 0;
 /**
  * 加载js文件
  * @param src
  * @param options 配置
  */
-function loadScript(src, options) {
+export function loadScript(src, options) {
     return new Promise(function (resolve, reject) {
         options = options || {};
         // 判断是否已经加载，推荐使用 checkLoad
@@ -57,7 +54,6 @@ function loadScript(src, options) {
         container.appendChild(script);
     });
 }
-exports.loadScript = loadScript;
-exports.default = {
+export default {
     loadScript: loadScript
 };

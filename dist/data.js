@@ -1,22 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.filterJson = exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
-var string_1 = require("./string");
+import { camelToUnder, underToCamel } from './string';
 /**
  * 判断传入的参数是不是JSON对象
  * @param param: 需要验证的表达式
  */
-function isJson(param) {
+export function isJson(param) {
     return (typeof param === 'object' &&
         Object.prototype.toString.call(param).toLowerCase() === '[object object]' &&
         !param.length);
 }
-exports.isJson = isJson;
 /**
  * 获取数据类型，区分不同对象类型
  * @param param: 需要验证的表达式
  */
-function getDataType(param) {
+export function getDataType(param) {
     var type = typeof param;
     if (type === 'object') {
         /* istanbul ignore else */
@@ -32,12 +28,11 @@ function getDataType(param) {
     }
     return type;
 }
-exports.getDataType = getDataType;
 /**
  * 深度克隆数组或对象
  * @param origin: 要克隆的对象
  */
-function clone(origin) {
+export function clone(origin) {
     var cloned;
     var type = getDataType(origin);
     if (type === 'array' || type === 'json') {
@@ -54,13 +49,12 @@ function clone(origin) {
     }
     return cloned;
 }
-exports.clone = clone;
 /**
  * 深度克隆并合并对象
  * @param target: 合并后的对象
  * @param args: 剩余参数
  */
-function merge(target) {
+export function merge(target) {
     var args = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
@@ -91,12 +85,11 @@ function merge(target) {
     });
     return target;
 }
-exports.merge = merge;
 /**
  * 获取 json 格式的对象
  * @param data
  */
-function parseJson(data) {
+export function parseJson(data) {
     var result = null;
     if (isJson(data)) {
         result = clone(data);
@@ -114,7 +107,6 @@ function parseJson(data) {
     }
     return result;
 }
-exports.parseJson = parseJson;
 function trans(source, format) {
     if (source instanceof Array) {
         return source.map(function (v) { return trans(v, format); });
@@ -122,7 +114,7 @@ function trans(source, format) {
     else if (isJson(source)) {
         var result_1 = {};
         Object.keys(source).forEach(function (key) {
-            var newKey = format === 'camel' ? string_1.underToCamel(key) : string_1.camelToUnder(key);
+            var newKey = format === 'camel' ? underToCamel(key) : camelToUnder(key);
             result_1[newKey] = trans(source[key], format);
         });
         return result_1;
@@ -133,23 +125,21 @@ function trans(source, format) {
  * json 对象 key 转换成驼峰格式
  * @param source 源对象
  */
-function jsonToCamel(source) {
+export function jsonToCamel(source) {
     return trans(source, 'camel');
 }
-exports.jsonToCamel = jsonToCamel;
 /**
  * json 对象 key 转换成小写下划线格式
  * @param source 源对象
  */
-function jsonToUnder(source) {
+export function jsonToUnder(source) {
     return trans(source, 'under');
 }
-exports.jsonToUnder = jsonToUnder;
 /**
  * 过滤空数据
  * @param o
  */
-function filterJson(o) {
+export function filterJson(o) {
     for (var key in o) {
         if (o[key] === null) {
             delete o[key];
@@ -163,8 +153,7 @@ function filterJson(o) {
     }
     return o;
 }
-exports.filterJson = filterJson;
-exports.default = {
+export default {
     isJson: isJson,
     parseJson: parseJson,
     getDataType: getDataType,

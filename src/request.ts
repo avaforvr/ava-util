@@ -1,5 +1,6 @@
 import { compile } from 'path-to-regexp';
-import qs, { ParseOptions } from 'query-string';
+import qs from 'query-string';
+import type { ParseOptions } from 'query-string';
 
 const qsOptions: ParseOptions = { arrayFormat: 'bracket' };
 
