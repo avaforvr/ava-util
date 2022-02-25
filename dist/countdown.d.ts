@@ -14,7 +14,7 @@ interface TextConfigType {
     minuteText: [string, string];
     secondText: [string, string];
 }
-export interface ItemConfigType extends TextConfigType {
+export interface ItemConfigType extends Partial<TextConfigType> {
     endTime: number;
     isShowDay?: boolean;
     render?: (o: RenderParamType) => string;
