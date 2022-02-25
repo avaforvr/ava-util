@@ -16,8 +16,8 @@ interface TextConfigType {
 }
 export interface ItemConfigType extends TextConfigType {
     endTime: number;
-    isShowDay: boolean;
-    render: (o: RenderParamType) => string;
+    isShowDay?: boolean;
+    render?: (o: RenderParamType) => string;
     endRender?: (container: HTMLDivElement) => any;
 }
 export declare const initCountdown: (nowTime: number, textConfig: TextConfigType) => void;
