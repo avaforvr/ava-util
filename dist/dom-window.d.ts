@@ -14,6 +14,14 @@ export declare function getWindowScrollTop(): number;
  * 获取浏览器滚动条的宽度
  */
 export declare function getScrollBarWidth(): number;
+/**
+ * 触发 window scroll 事件
+ */
+export declare function dispatchWindowScroll(): void;
+/**
+ * 触发 window resize 事件
+ */
+export declare function dispatchWindowResize(): void;
 declare const _default: {
     getWindowWidth: typeof getWindowWidth;
     getWindowHeight: typeof getWindowHeight;

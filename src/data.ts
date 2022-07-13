@@ -150,6 +150,18 @@ export function filterJson(o: Record<string | number, any>): Record<string | num
     return o;
 }
 
+export function transJsonKeys(obj: Record<string, any>, mapKeys?: Record<string, string>, keepKeys?: string[]): Record<string, any> {
+    const newObj: Record<string, any> = {};
+    Object.entries(obj).map(([key, value]) => {
+        if (mapKeys && key in mapKeys) {
+            newObj[mapKeys[key]] = value;
+        } else if (!keepKeys || keepKeys.includes(key)) {
+            newObj[key] = value;
+        }
+    });
+    return newObj;
+}
+
 export default {
     isJson,
     parseJson,
@@ -158,5 +170,6 @@ export default {
     merge,
     jsonToCamel,
     jsonToUnder,
-    filterJson
+    filterJson,
+    transJsonKeys
 };

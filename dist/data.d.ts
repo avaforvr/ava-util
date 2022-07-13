@@ -39,6 +39,7 @@ export declare function jsonToUnder<T>(source: T): T;
  * @param o
  */
 export declare function filterJson(o: Record<string | number, any>): Record<string | number, any>;
+export declare function transJsonKeys(obj: Record<string, any>, mapKeys?: Record<string, string>, keepKeys?: string[]): Record<string, any>;
 declare const _default: {
     isJson: typeof isJson;
     parseJson: typeof parseJson;
@@ -48,5 +49,6 @@ declare const _default: {
     jsonToCamel: typeof jsonToCamel;
     jsonToUnder: typeof jsonToUnder;
     filterJson: typeof filterJson;
+    transJsonKeys: typeof transJsonKeys;
 };
 export default _default;

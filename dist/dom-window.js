@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getScrollBarWidth = exports.getWindowScrollTop = exports.getWindowHeight = exports.getWindowWidth = void 0;
+exports.dispatchWindowResize = exports.dispatchWindowScroll = exports.getScrollBarWidth = exports.getWindowScrollTop = exports.getWindowHeight = exports.getWindowWidth = void 0;
 /**
  * 获取window的宽度
  */
@@ -40,6 +40,32 @@ function getScrollBarWidth() {
     }
 }
 exports.getScrollBarWidth = getScrollBarWidth;
+/**
+ * 触发 window scroll 事件
+ */
+function dispatchWindowScroll() {
+    window.scrollTo(window.pageXOffset, window.pageYOffset - 1);
+    window.scrollTo(window.pageXOffset, window.pageYOffset + 1);
+}
+exports.dispatchWindowScroll = dispatchWindowScroll;
+/**
+ * 触发 window resize 事件
+ */
+function dispatchWindowResize() {
+    if (typeof (Event) === 'function') {
+        // modern browsers
+        window.dispatchEvent(new Event('resize'));
+    }
+    else {
+        // for IE and other old browsers
+        // causes deprecation warning on modern browsers
+        var evt = window.document.createEvent('UIEvents');
+        // @ts-ignore
+        evt.initUIEvent('resize', true, false, window, 0);
+        window.dispatchEvent(evt);
+    }
+}
+exports.dispatchWindowResize = dispatchWindowResize;
 exports.default = {
     getWindowWidth: getWindowWidth,
     getWindowHeight: getWindowHeight,

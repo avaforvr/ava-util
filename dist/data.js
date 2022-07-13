@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.filterJson = exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
+exports.transJsonKeys = exports.filterJson = exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
 var string_1 = require("./string");
 /**
  * 判断传入的参数是不是JSON对象
@@ -164,6 +164,20 @@ function filterJson(o) {
     return o;
 }
 exports.filterJson = filterJson;
+function transJsonKeys(obj, mapKeys, keepKeys) {
+    var newObj = {};
+    Object.entries(obj).map(function (_a) {
+        var key = _a[0], value = _a[1];
+        if (mapKeys && key in mapKeys) {
+            newObj[mapKeys[key]] = value;
+        }
+        else if (!keepKeys || keepKeys.includes(key)) {
+            newObj[key] = value;
+        }
+    });
+    return newObj;
+}
+exports.transJsonKeys = transJsonKeys;
 exports.default = {
     isJson: isJson,
     parseJson: parseJson,
@@ -172,5 +186,6 @@ exports.default = {
     merge: merge,
     jsonToCamel: jsonToCamel,
     jsonToUnder: jsonToUnder,
-    filterJson: filterJson
+    filterJson: filterJson,
+    transJsonKeys: transJsonKeys
 };
