@@ -1,6 +1,17 @@
 type UtilFunc = (userAgent?: string) => boolean;
 
-const CLIENT_KEYS: ReadonlyArray<string> = ['isPhone', 'isTablet', 'isMobile', 'isIOS', 'isAndroid'];
+const CLIENT_KEYS: ReadonlyArray<string> = [
+    'isPhone',
+    'isTablet',
+    'isMobile',
+    'isIOS',
+    'isAndroid',
+    'isChrome',
+    'isSafari',
+    'isEdge',
+    'isFirefox',
+    'isOpera'
+];
 
 type ClientKeyType = typeof CLIENT_KEYS[number];
 
@@ -8,7 +19,6 @@ export type UAParsedMap = Record<ClientKeyType, boolean>
 
 export type UAUtilsType = Record<ClientKeyType, UtilFunc> & {
     parse: (userAgent: string) => UAParsedMap;
-    getAppVersion: (userAgent: string) => string;
 };
 
 const CLIENT_REGS: Record<ClientKeyType, RegExp> = {
@@ -17,6 +27,11 @@ const CLIENT_REGS: Record<ClientKeyType, RegExp> = {
     isMobile: /(iPad|iPhone|iPod|Android|ios|Windows Phone)/i,
     isIOS: /(iPhone|iPad|iPod|iOS)/i,
     isAndroid: /Android/i,
+    isSafari: /Version\/([\d.]+).*Safari/i,
+    isChrome: /(Chrome\/([\d.]+))|(((iPhone|iPad|iPod|iOS)).*CriOS)/i,
+    isFirefox: /Firefox/,
+    isOpera: /OPR/,
+    isEdge: /Edge/
 };
 
 const uaUtils: UAUtilsType = Object.create(null);
@@ -48,19 +63,6 @@ uaUtils.parse = (userAgent: string): UAParsedMap => {
         obj[key] = CLIENT_REGS[(key as ClientKeyType)].test(userAgent);
     });
     return obj;
-};
-
-/**
- * 获取 App 版本号
- * @param userAgent user-agent
- */
-uaUtils.getAppVersion = (userAgent: string): string => {
-    const pattern = /(lq-App)\s([\S]*?)\s([0-9]+?\.[0-9]+?\.[0-9]+)[\s]*/;
-    const matches = userAgent.match(pattern);
-    if (matches && matches.length > 0) {
-        return matches[3] ? matches[3] : '';
-    }
-    return '';
 };
 
 export default uaUtils;

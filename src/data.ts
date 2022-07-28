@@ -1,4 +1,4 @@
-import {camelToUnder, underToCamel} from './string';
+import { camelToUnder, underToCamel } from './string';
 
 /**
  * 判断传入的参数是不是JSON对象
@@ -108,7 +108,7 @@ function trans(source: any, format: 'camel' | 'under'): any {
         return source.map(v => trans(v, format));
     } else if (isJson(source)) {
         const result = {};
-        Object.keys(source).forEach(function (key) {
+        Object.keys(source).forEach(function(key) {
             var newKey = format === 'camel' ? underToCamel(key) : camelToUnder(key);
             result[newKey] = trans(source[key], format);
         });
@@ -135,7 +135,7 @@ export function jsonToUnder<T>(source: T): T {
 
 /**
  * 过滤空数据
- * @param o
+ * @param o 需要过滤的对象
  */
 export function filterJson(o: Record<string | number, any>): Record<string | number, any> {
     for (const key in o) {

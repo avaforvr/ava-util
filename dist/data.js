@@ -147,7 +147,7 @@ function jsonToUnder(source) {
 exports.jsonToUnder = jsonToUnder;
 /**
  * 过滤空数据
- * @param o
+ * @param o 需要过滤的对象
  */
 function filterJson(o) {
     for (var key in o) {

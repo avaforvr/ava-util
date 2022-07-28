@@ -70,5 +70,7 @@ exports.default = {
     getWindowWidth: getWindowWidth,
     getWindowHeight: getWindowHeight,
     getWindowScrollTop: getWindowScrollTop,
-    getScrollBarWidth: getScrollBarWidth
+    getScrollBarWidth: getScrollBarWidth,
+    dispatchWindowScroll: dispatchWindowScroll,
+    dispatchWindowResize: dispatchWindowResize
 };

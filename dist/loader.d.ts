@@ -1,4 +1,4 @@
-interface LoadScriptOptions {
+export interface LoadScriptOptions {
     id?: string;
     async?: boolean;
     checkLoad?: () => boolean;

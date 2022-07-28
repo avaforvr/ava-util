@@ -1,12 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CLIENT_KEYS = ['isPhone', 'isTablet', 'isMobile', 'isIOS', 'isAndroid'];
+var CLIENT_KEYS = [
+    'isPhone',
+    'isTablet',
+    'isMobile',
+    'isIOS',
+    'isAndroid',
+    'isChrome',
+    'isSafari',
+    'isEdge',
+    'isFirefox',
+    'isOpera'
+];
 var CLIENT_REGS = {
     isPhone: /(iPhone|iPod|Android|BlackBerry|SymbianOS|Windows Phone|ZuneWP7|webOS)/i,
     isTablet: /iPad/i,
     isMobile: /(iPad|iPhone|iPod|Android|ios|Windows Phone)/i,
     isIOS: /(iPhone|iPad|iPod|iOS)/i,
     isAndroid: /Android/i,
+    isSafari: /Version\/([\d.]+).*Safari/i,
+    isChrome: /(Chrome\/([\d.]+))|(((iPhone|iPad|iPod|iOS)).*CriOS)/i,
+    isFirefox: /Firefox/,
+    isOpera: /OPR/,
+    isEdge: /Edge/
 };
 var uaUtils = Object.create(null);
 /**
@@ -35,17 +51,5 @@ uaUtils.parse = function (userAgent) {
         obj[key] = CLIENT_REGS[key].test(userAgent);
     });
     return obj;
-};
-/**
- * 获取 App 版本号
- * @param userAgent user-agent
- */
-uaUtils.getAppVersion = function (userAgent) {
-    var pattern = /(lq-App)\s([\S]*?)\s([0-9]+?\.[0-9]+?\.[0-9]+)[\s]*/;
-    var matches = userAgent.match(pattern);
-    if (matches && matches.length > 0) {
-        return matches[3] ? matches[3] : '';
-    }
-    return '';
 };
 exports.default = uaUtils;

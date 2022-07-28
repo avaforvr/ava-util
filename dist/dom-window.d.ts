@@ -27,5 +27,7 @@ declare const _default: {
     getWindowHeight: typeof getWindowHeight;
     getWindowScrollTop: typeof getWindowScrollTop;
     getScrollBarWidth: typeof getScrollBarWidth;
+    dispatchWindowScroll: typeof dispatchWindowScroll;
+    dispatchWindowResize: typeof dispatchWindowResize;
 };
 export default _default;

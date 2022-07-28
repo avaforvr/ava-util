@@ -65,5 +65,7 @@ export default {
     getWindowWidth,
     getWindowHeight,
     getWindowScrollTop,
-    getScrollBarWidth
+    getScrollBarWidth,
+    dispatchWindowScroll,
+    dispatchWindowResize
 };

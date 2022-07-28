@@ -4,7 +4,6 @@ declare type ClientKeyType = typeof CLIENT_KEYS[number];
 export declare type UAParsedMap = Record<ClientKeyType, boolean>;
 export declare type UAUtilsType = Record<ClientKeyType, UtilFunc> & {
     parse: (userAgent: string) => UAParsedMap;
-    getAppVersion: (userAgent: string) => string;
 };
 declare const uaUtils: UAUtilsType;
 export default uaUtils;

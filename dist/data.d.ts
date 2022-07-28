@@ -36,7 +36,7 @@ export declare function jsonToCamel<T>(source: T): T;
 export declare function jsonToUnder<T>(source: T): T;
 /**
  * 过滤空数据
- * @param o
+ * @param o 需要过滤的对象
  */
 export declare function filterJson(o: Record<string | number, any>): Record<string | number, any>;
 export declare function transJsonKeys(obj: Record<string, any>, mapKeys?: Record<string, string>, keepKeys?: string[]): Record<string, any>;
