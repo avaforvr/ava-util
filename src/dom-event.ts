@@ -35,9 +35,26 @@ export function checkWrappedBy(e, domElem) {
     } while (target && target.parentNode);
     return false;
 }
+/**
+ * 判断触发事件的节点是否某指定类型的标签或包含在标签内
+ * @param e 触发事件
+ * @param diffTagName 指定的标签名（小写）
+ */
+export function checkWrappedByTag(e: MouseEvent, diffTagName: string) {
+    let target = e.target as HTMLElement;
+    do {
+        console.log(target.tagName.toLowerCase(), diffTagName);
+        if (target.tagName.toLowerCase() === diffTagName) {
+            return true;
+        }
+        target = target.parentNode as HTMLElement;
+    } while (target && target.parentNode);
+    return false;
+}
 
 export default {
     add: addEvent,
     remove: removeEvent,
-    checkWrappedBy: checkWrappedBy
+    checkWrappedBy,
+    checkWrappedByTag
 };

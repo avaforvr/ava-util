@@ -30,12 +30,13 @@ export function getParamInSearch(key: string, search?: string): string | undefin
  * @param obj 待解析网址
  * @param search search
  */
-export function updateSearch(obj: Record<string, string | number>, search: string = '') {
+export function updateSearch(obj: Record<string, string | number | undefined>, search: string = '', options: ParseOptions = {}) {
+    const opts = { ...qsOptions, ...options };
     const merged = {
-        ...qs.parse(search, qsOptions),
+        ...qs.parse(search, opts),
         ...obj
     };
-    return `?${qs.stringify(merged, qsOptions)}`;
+    return `?${qs.stringify(merged, opts)}`;
 }
 
 /**

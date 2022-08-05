@@ -1,3 +1,4 @@
+import type { ParseOptions } from 'query-string';
 /**
  * 获取 url 中的参数并解析成对象
  * @param search 待解析search
@@ -14,7 +15,7 @@ export declare function getParamInSearch(key: string, search?: string): string |
  * @param obj 待解析网址
  * @param search search
  */
-export declare function updateSearch(obj: Record<string, string | number>, search?: string): string;
+export declare function updateSearch(obj: Record<string, string | number | undefined>, search?: string, options?: ParseOptions): string;
 /**
  * 获取 pathname
  * @param url
