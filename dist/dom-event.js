@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkWrappedBy = exports.removeEvent = exports.addEvent = void 0;
+exports.checkWrappedByTag = exports.checkWrappedBy = exports.removeEvent = exports.addEvent = void 0;
 /**
  * 绑定事件
  * @param domElem    Dom 元素
@@ -40,8 +40,26 @@ function checkWrappedBy(e, domElem) {
     return false;
 }
 exports.checkWrappedBy = checkWrappedBy;
+/**
+ * 判断触发事件的节点是否某指定类型的标签或包含在标签内
+ * @param e 触发事件
+ * @param diffTagName 指定的标签名（小写）
+ */
+function checkWrappedByTag(e, diffTagName) {
+    var target = e.target;
+    do {
+        console.log(target.tagName.toLowerCase(), diffTagName);
+        if (target.tagName.toLowerCase() === diffTagName) {
+            return true;
+        }
+        target = target.parentNode;
+    } while (target && target.parentNode);
+    return false;
+}
+exports.checkWrappedByTag = checkWrappedByTag;
 exports.default = {
     add: addEvent,
     remove: removeEvent,
-    checkWrappedBy: checkWrappedBy
+    checkWrappedBy: checkWrappedBy,
+    checkWrappedByTag: checkWrappedByTag
 };
