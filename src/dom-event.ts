@@ -43,7 +43,6 @@ export function checkWrappedBy(e, domElem) {
 export function checkWrappedByTag(e: MouseEvent, diffTagName: string) {
     let target = e.target as HTMLElement;
     do {
-        console.log(target.tagName.toLowerCase(), diffTagName);
         if (target.tagName.toLowerCase() === diffTagName) {
             return true;
         }

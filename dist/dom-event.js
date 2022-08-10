@@ -48,7 +48,6 @@ exports.checkWrappedBy = checkWrappedBy;
 function checkWrappedByTag(e, diffTagName) {
     var target = e.target;
     do {
-        console.log(target.tagName.toLowerCase(), diffTagName);
         if (target.tagName.toLowerCase() === diffTagName) {
             return true;
         }
