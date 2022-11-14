@@ -1,5 +1,5 @@
 Arguments: 
-  /opt/homebrew/Cellar/node/16.12.0/bin/node /opt/homebrew/Cellar/yarn/1.22.17/libexec/bin/yarn.js publish
+  /opt/homebrew/Cellar/node/17.0.1/bin/node /opt/homebrew/Cellar/yarn/1.22.17/libexec/bin/yarn.js publish
 
 PATH: 
   /Users/admin/.rvm/gems/ruby-3.0.0/bin:/Users/admin/.rvm/gems/ruby-3.0.0@global/bin:/Users/admin/.rvm/rubies/ruby-3.0.0/bin:/opt/homebrew/opt/php@8.0/sbin:/opt/homebrew/opt/php@8.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/admin/.rvm/bin
@@ -8,7 +8,7 @@ Yarn version:
   1.22.17
 
 Node version: 
-  16.12.0
+  17.0.1
 
 Platform: 
   darwin arm64
@@ -23,13 +23,13 @@ Trace:
       at IncomingMessage.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.17/libexec/lib/cli.js:141777:12)
       at Object.onceWrapper (node:events:509:28)
       at IncomingMessage.emit (node:events:402:35)
-      at endReadableNT (node:internal/streams/readable:1343:12)
+      at endReadableNT (node:internal/streams/readable:1340:12)
       at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
       "name": "ava-util",
-      "version": "1.0.7",
+      "version": "1.0.19",
       "description": "Native javascript utils library.",
       "main": "dist/index.js",
       "scripts": {

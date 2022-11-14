@@ -46,7 +46,8 @@ function updateSearch(obj, search, options) {
     if (options === void 0) { options = {}; }
     var opts = __assign(__assign({}, qsOptions), options);
     var merged = __assign(__assign({}, qs.parse(search, opts)), obj);
-    return "?" + qs.stringify(merged, opts);
+    var newSearch = qs.stringify(merged, opts);
+    return newSearch ? "?" + newSearch : '';
 }
 exports.updateSearch = updateSearch;
 /**

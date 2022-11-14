@@ -36,7 +36,8 @@ export function updateSearch(obj: Record<string, string | number | undefined>, s
         ...qs.parse(search, opts),
         ...obj
     };
-    return `?${qs.stringify(merged, opts)}`;
+    const newSearch = qs.stringify(merged, opts);
+    return newSearch ? `?${newSearch}` : '';
 }
 
 /**
