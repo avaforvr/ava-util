@@ -1,4 +1,14 @@
-import { isJson, getDataType, clone, merge, parseJson, jsonToCamel, jsonToUnder } from '../src/data';
+import {
+    isJson,
+    getDataType,
+    clone,
+    merge,
+    parseJson,
+    jsonToCamel,
+    jsonToUnder,
+    isEmpty,
+    filterFields
+} from '../src/data';
 
 const TYPES = {
     number: 123,
@@ -191,6 +201,140 @@ describe('test data.js', () => {
 
         it('Check jsonToUnder', () => {
             expect(jsonToUnder(camelObj)).toStrictEqual(underObj);
+        });
+    });
+
+    describe('isEmpty', () => {
+        const emptyList = [
+            null,
+            undefined,
+            '',
+            [],
+            {}
+        ];
+        const notEmptyList = [
+            'a',
+            ['a'],
+            { a: 1 }
+        ];
+
+        emptyList.forEach(item => {
+            it(String(item) + ' should return true', () => {
+                expect(isEmpty(item)).toBe(true);
+            });
+        });
+
+        notEmptyList.forEach(item => {
+            it(String(item) + ' should return false', () => {
+                expect(isEmpty(item)).toBe(false);
+            });
+        });
+    });
+
+    describe('filterFields', () => {
+        const data = {
+            countryList: [
+                {
+                    countryCode: 'US',
+                    countryId: 3859,
+                    countryName: 'United States'
+                },
+                { countryCode: 'CA', countryId: 3844, countryName: 'Canada' }
+            ],
+            currencyList: [
+                {
+                    currency: 'USD',
+                    currencyIcon: '',
+                    currencyId: 1,
+                    currencyLocalSymbol: '$',
+                    currencySymbol: 'US$'
+                },
+                {
+                    currency: 'CAD',
+                    currencyIcon: '',
+                    currencyId: 3,
+                    currencyLocalSymbol: '$',
+                    currencySymbol: 'CA$'
+                }
+            ],
+            languageList: [{ code: 'en', languageId: 1, name: 'English' }],
+            testJson: {
+                a: 1,
+                b: {
+                    c1: 111,
+                    c2: 222
+                }
+            },
+            testArray: {
+                a: 1,
+                b: [
+                    [
+                        { c1: 11, c2: 1111 },
+                        { d1: 22, c2: 2222 }
+                    ]
+                ]
+            }
+        };
+
+        const rules = {
+            keepFields: ['countryList', 'currencyList', 'testJson', 'testArray'],
+            currencyList: {
+                exludeFields: ['currencyIcon', 'currencyId']
+            },
+            testJson: {
+                b: ['c1']
+            },
+            testArray: {
+                b: ['c1', 'd1']
+            }
+        };
+
+        it('filterFields ', () => {
+            expect(filterFields(data, rules)).toEqual({
+                countryList: [
+                    {
+                        countryCode: 'US',
+                        countryId: 3859,
+                        countryName: 'United States'
+                    },
+                    {
+                        countryCode: 'CA',
+                        countryId: 3844,
+                        countryName: 'Canada'
+                    }
+                ],
+                currencyList: [
+                    {
+                        currency: 'USD',
+                        currencyLocalSymbol: '$',
+                        currencySymbol: 'US$'
+                    },
+                    {
+                        currency: 'CAD',
+                        currencyLocalSymbol: '$',
+                        currencySymbol: 'CA$'
+                    }
+                ],
+                testJson: {
+                    a: 1,
+                    b: {
+                        c1: 111
+                    }
+                },
+                testArray: {
+                    a: 1,
+                    b: [
+                        [
+                            {
+                                c1: 11
+                            },
+                            {
+                                d1: 22
+                            }
+                        ]
+                    ]
+                }
+            });
         });
     });
 });

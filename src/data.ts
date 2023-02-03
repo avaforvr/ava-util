@@ -162,6 +162,74 @@ export function transJsonKeys(obj: Record<string, any>, mapKeys?: Record<string,
     return newObj;
 }
 
+/**
+ * 判断是不是空值、空数组、空对象
+ * @param data 各种数据类型的数据
+ */
+export function isEmpty(data: null | undefined | any): boolean {
+    if (data === undefined || data === null || data === '') {
+        return true;
+    }
+    const type = getDataType(data);
+    if (type === 'array') {
+        return data.length === 0;
+    }
+    if (type === 'json') {
+        return JSON.stringify(data) === '{}';
+    }
+    return false;
+}
+
+/**
+ * 判断json属性是否保留
+ * @param key json属性名
+ * @param keepFields 待保留属性名
+ * @param exludeFields 待删除属性名
+ */
+function checkKeepField(key: string, keepFields: string[] | undefined, exludeFields: string[] | undefined): boolean {
+    if (typeof exludeFields !== 'undefined') {
+        return !exludeFields.includes(key);
+    }
+    if (typeof keepFields !== 'undefined') {
+        return keepFields.includes(key);
+    }
+    return true;
+}
+
+/**
+ * 过滤 JSON 结构（包含数组）数据的属性
+ * @param data 原始数据
+ * @param rules 过滤规则
+ */
+type IFilterFieldsRules = string[] | (Record<string, any> & {
+    keepFields?: string[];
+    exludeFields?: string[];
+});
+
+export function filterFields<T>(data: T, rules: IFilterFieldsRules): T {
+    const dataType = getDataType(data);
+    if (isEmpty(data) || isEmpty(rules) || !(['json', 'array'].includes(dataType))) {
+        return data;
+    }
+
+    const keepFields = Array.isArray(rules) ? rules : rules?.keepFields;
+    const exludeFields = Array.isArray(rules) ? undefined : rules?.exludeFields;
+
+    if (dataType === 'json') {
+        const _data = {} as T;
+        Object.entries(data as Record<string, any>).forEach(([key, value]) => {
+            if (checkKeepField(key, keepFields, exludeFields)) {
+                // @ts-ignore
+                _data[key] = key in rules ? filterFields(value, rules[key]) : value;
+            }
+        });
+        return _data;
+    } else {
+        // @ts-ignore
+        return (data as Array<any>).map(value => filterFields(value, rules));
+    }
+}
+
 export default {
     isJson,
     parseJson,
@@ -171,5 +239,7 @@ export default {
     jsonToCamel,
     jsonToUnder,
     filterJson,
-    transJsonKeys
+    transJsonKeys,
+    isEmpty,
+    filterFields
 };

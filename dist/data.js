@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.transJsonKeys = exports.filterJson = exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
+exports.filterFields = exports.isEmpty = exports.transJsonKeys = exports.filterJson = exports.jsonToUnder = exports.jsonToCamel = exports.parseJson = exports.merge = exports.clone = exports.getDataType = exports.isJson = void 0;
 var string_1 = require("./string");
 /**
  * 判断传入的参数是不是JSON对象
@@ -178,6 +178,63 @@ function transJsonKeys(obj, mapKeys, keepKeys) {
     return newObj;
 }
 exports.transJsonKeys = transJsonKeys;
+/**
+ * 判断是不是空值、空数组、空对象
+ * @param data 各种数据类型的数据
+ */
+function isEmpty(data) {
+    if (data === undefined || data === null || data === '') {
+        return true;
+    }
+    var type = getDataType(data);
+    if (type === 'array') {
+        return data.length === 0;
+    }
+    if (type === 'json') {
+        return JSON.stringify(data) === '{}';
+    }
+    return false;
+}
+exports.isEmpty = isEmpty;
+/**
+ * 判断json属性是否保留
+ * @param key json属性名
+ * @param keepFields 待保留属性名
+ * @param exludeFields 待删除属性名
+ */
+function checkKeepField(key, keepFields, exludeFields) {
+    if (typeof exludeFields !== 'undefined') {
+        return !exludeFields.includes(key);
+    }
+    if (typeof keepFields !== 'undefined') {
+        return keepFields.includes(key);
+    }
+    return true;
+}
+function filterFields(data, rules) {
+    var dataType = getDataType(data);
+    if (isEmpty(data) || isEmpty(rules) || !(['json', 'array'].includes(dataType))) {
+        return data;
+    }
+    var keepFields = Array.isArray(rules) ? rules : rules === null || rules === void 0 ? void 0 : rules.keepFields;
+    var exludeFields = Array.isArray(rules) ? undefined : rules === null || rules === void 0 ? void 0 : rules.exludeFields;
+    if (dataType === 'json') {
+        var _data_1 = {};
+        Object.entries(data).forEach(function (_a) {
+            var key = _a[0], value = _a[1];
+            if (checkKeepField(key, keepFields, exludeFields)) {
+                // @ts-ignore
+                _data_1[key] = key in rules ? filterFields(value, rules[key]) : value;
+            }
+        });
+        return _data_1;
+    }
+    else {
+        // @ts-ignore
+        return data.map(function (value) { return filterFields(value, rules); });
+    }
+}
+exports.filterFields = filterFields;
 exports.default = {
     isJson: isJson,
     parseJson: parseJson,
@@ -187,5 +244,7 @@ exports.default = {
     jsonToCamel: jsonToCamel,
     jsonToUnder: jsonToUnder,
     filterJson: filterJson,
-    transJsonKeys: transJsonKeys
+    transJsonKeys: transJsonKeys,
+    isEmpty: isEmpty,
+    filterFields: filterFields
 };
