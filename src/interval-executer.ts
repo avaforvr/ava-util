@@ -11,6 +11,7 @@ const requestAnimFrame = (function() {
         return window.setTimeout(callback, 1000 / 60, (new Date()).getTime());
     };
 })();
+
 const cancelAnimFrame = (function() {
     if (typeof window === 'undefined') {
         return null;

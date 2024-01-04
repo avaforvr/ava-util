@@ -49,6 +49,7 @@
         "**/*.{js,ts}": "npm run lint"
     },
     "dependencies": {
+        "hls.js": "^1.4.14",
         "path-to-regexp": "^6.2.0",
         "query-string": "^7.0.1"
     }

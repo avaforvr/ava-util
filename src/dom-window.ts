@@ -61,11 +61,29 @@ export function dispatchWindowResize() {
     }
 }
 
+/**
+ * window.onload 的 Promise 封装
+ */
+export function windowLoad(): Promise<void> {
+    return new Promise(resolve => {
+        if (typeof window === 'undefined') {
+            resolve();
+        } else if (document.readyState === 'complete') {
+            resolve();
+        } else {
+            window.addEventListener('load', () => {
+                resolve();
+            });
+        }
+    });
+}
+
 export default {
     getWindowWidth,
     getWindowHeight,
     getWindowScrollTop,
     getScrollBarWidth,
     dispatchWindowScroll,
-    dispatchWindowResize
+    dispatchWindowResize,
+    windowLoad,
 };
