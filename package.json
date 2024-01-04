@@ -1,6 +1,6 @@
 {
     "name": "ava-util",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "description": "Native javascript utils library.",
     "main": "dist/index.js",
     "scripts": {
