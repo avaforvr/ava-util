@@ -22,6 +22,10 @@ export declare function dispatchWindowScroll(): void;
  * 触发 window resize 事件
  */
 export declare function dispatchWindowResize(): void;
+/**
+ * window.onload 的 Promise 封装
+ */
+export declare function windowLoad(): Promise<void>;
 declare const _default: {
     getWindowWidth: typeof getWindowWidth;
     getWindowHeight: typeof getWindowHeight;
@@ -29,5 +33,6 @@ declare const _default: {
     getScrollBarWidth: typeof getScrollBarWidth;
     dispatchWindowScroll: typeof dispatchWindowScroll;
     dispatchWindowResize: typeof dispatchWindowResize;
+    windowLoad: typeof windowLoad;
 };
 export default _default;

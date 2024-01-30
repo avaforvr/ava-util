@@ -85,5 +85,5 @@ export default {
     getScrollBarWidth,
     dispatchWindowScroll,
     dispatchWindowResize,
-    windowLoad,
+    windowLoad
 };

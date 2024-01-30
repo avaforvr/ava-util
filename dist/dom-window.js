@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dispatchWindowResize = exports.dispatchWindowScroll = exports.getScrollBarWidth = exports.getWindowScrollTop = exports.getWindowHeight = exports.getWindowWidth = void 0;
+exports.windowLoad = exports.dispatchWindowResize = exports.dispatchWindowScroll = exports.getScrollBarWidth = exports.getWindowScrollTop = exports.getWindowHeight = exports.getWindowWidth = void 0;
 /**
  * 获取window的宽度
  */
@@ -66,11 +66,31 @@ function dispatchWindowResize() {
     }
 }
 exports.dispatchWindowResize = dispatchWindowResize;
+/**
+ * window.onload 的 Promise 封装
+ */
+function windowLoad() {
+    return new Promise(function (resolve) {
+        if (typeof window === 'undefined') {
+            resolve();
+        }
+        else if (document.readyState === 'complete') {
+            resolve();
+        }
+        else {
+            window.addEventListener('load', function () {
+                resolve();
+            });
+        }
+    });
+}
+exports.windowLoad = windowLoad;
 exports.default = {
     getWindowWidth: getWindowWidth,
     getWindowHeight: getWindowHeight,
     getWindowScrollTop: getWindowScrollTop,
     getScrollBarWidth: getScrollBarWidth,
     dispatchWindowScroll: dispatchWindowScroll,
-    dispatchWindowResize: dispatchWindowResize
+    dispatchWindowResize: dispatchWindowResize,
+    windowLoad: windowLoad
 };
