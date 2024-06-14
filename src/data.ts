@@ -2,7 +2,7 @@ import { camelToUnder, underToCamel } from './string';
 
 /**
  * 判断传入的参数是不是JSON对象
- * @param param: 需要验证的表达式
+ * @param param 需要验证的表达式
  */
 export function isJson(param: any): boolean {
     return (
@@ -14,7 +14,7 @@ export function isJson(param: any): boolean {
 
 /**
  * 获取数据类型，区分不同对象类型
- * @param param: 需要验证的表达式
+ * @param param 需要验证的表达式
  */
 export function getDataType(param: any): string {
     let type: string = typeof param;
@@ -33,14 +33,14 @@ export function getDataType(param: any): string {
 
 /**
  * 深度克隆数组或对象
- * @param origin: 要克隆的对象
+ * @param origin 要克隆的对象
  */
 export function clone<T>(origin: T): T {
     let cloned: any;
     const type = getDataType(origin);
     if (type === 'array' || type === 'json') {
         cloned = type === 'array' ? [] : {};
-        Object.keys(origin).forEach(key => {
+        Object.keys(origin as Object).forEach(key => {
             const nextType = getDataType(origin[key]);
             cloned[key] = nextType === 'array' || nextType === 'json'
                 ? clone(origin[key])
@@ -54,11 +54,11 @@ export function clone<T>(origin: T): T {
 
 /**
  * 深度克隆并合并对象
- * @param target: 合并后的对象
- * @param args: 剩余参数
+ * @param target 合并后的对象
+ * @param args 剩余参数
  */
-export function merge(target: any[] | object, ...args: any[]): any[] | object {
-    target = target || {};
+export function merge<T = Array<any> | Record<string | number, any>>(target: T, ...args: T[]): T {
+    target = target || {} as T;
     const targetType = getDataType(target);
 
     args.forEach(arg => {
@@ -66,7 +66,7 @@ export function merge(target: any[] | object, ...args: any[]): any[] | object {
         if (getDataType(arg) !== targetType) {
             target = clone(arg);
         } else {
-            Object.keys(arg).forEach(key => {
+            Object.keys(arg as Object).forEach(key => {
                 if (isJson(arg[key])) {
                     // Json对象
                     target[key] = merge(target[key], arg[key]);
@@ -109,7 +109,7 @@ function trans(source: any, format: 'camel' | 'under'): any {
     } else if (isJson(source)) {
         const result = {};
         Object.keys(source).forEach(function(key) {
-            var newKey = format === 'camel' ? underToCamel(key) : camelToUnder(key);
+            const newKey = format === 'camel' ? underToCamel(key) : camelToUnder(key);
             result[newKey] = trans(source[key], format);
         });
         return result;

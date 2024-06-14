@@ -4,7 +4,7 @@ exports.filterFields = exports.isEmpty = exports.transJsonKeys = exports.filterJ
 var string_1 = require("./string");
 /**
  * 判断传入的参数是不是JSON对象
- * @param param: 需要验证的表达式
+ * @param param 需要验证的表达式
  */
 function isJson(param) {
     return (typeof param === 'object' &&
@@ -14,7 +14,7 @@ function isJson(param) {
 exports.isJson = isJson;
 /**
  * 获取数据类型，区分不同对象类型
- * @param param: 需要验证的表达式
+ * @param param 需要验证的表达式
  */
 function getDataType(param) {
     var type = typeof param;
@@ -35,7 +35,7 @@ function getDataType(param) {
 exports.getDataType = getDataType;
 /**
  * 深度克隆数组或对象
- * @param origin: 要克隆的对象
+ * @param origin 要克隆的对象
  */
 function clone(origin) {
     var cloned;
@@ -57,8 +57,8 @@ function clone(origin) {
 exports.clone = clone;
 /**
  * 深度克隆并合并对象
- * @param target: 合并后的对象
- * @param args: 剩余参数
+ * @param target 合并后的对象
+ * @param args 剩余参数
  */
 function merge(target) {
     var args = [];
