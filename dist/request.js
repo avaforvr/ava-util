@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generatePath = exports.getHash = exports.getSearch = exports.getPathname = exports.updateSearch = exports.getParamInSearch = exports.getParamsInSearch = void 0;
+exports.updateUrl = exports.generatePath = exports.getHash = exports.getSearch = exports.getPathname = exports.getOrigin = exports.updateSearch = exports.getParamInSearch = exports.getParamsInSearch = void 0;
 var path_to_regexp_1 = require("path-to-regexp");
 var qs = require("query-string");
 var qsOptions = { arrayFormat: 'bracket' };
@@ -50,6 +50,19 @@ function updateSearch(obj, search, options) {
     return newSearch ? "?" + newSearch : '';
 }
 exports.updateSearch = updateSearch;
+/**
+ * 获取 origin
+ * @param url
+ */
+function getOrigin(url) {
+    var reg = /^(http:|https:)*\/\/.*?\//;
+    var matches = url.match(reg);
+    if (matches) {
+        return matches[0].replace(/\/$/, '');
+    }
+    return '';
+}
+exports.getOrigin = getOrigin;
 /**
  * 获取 pathname
  * @param url
@@ -115,3 +128,16 @@ function generatePath(url, params, query) {
     return pathname + search + getHash(url);
 }
 exports.generatePath = generatePath;
+/**
+ * 传入json格式对象更新url
+ * @param obj 待解析网址
+ * @param search search
+ */
+function updateUrl(url, query) {
+    var origin = getOrigin(url);
+    var pathname = getPathname(url.replace(origin, ''));
+    var search = updateSearch(query, getSearch(url));
+    var hash = getHash(url);
+    return origin + pathname + search + hash;
+}
+exports.updateUrl = updateUrl;

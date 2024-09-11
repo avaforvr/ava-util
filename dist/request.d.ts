@@ -17,6 +17,11 @@ export declare function getParamInSearch(key: string, search?: string): string |
  */
 export declare function updateSearch(obj: Record<string, string | number | undefined>, search?: string, options?: ParseOptions): string;
 /**
+ * 获取 origin
+ * @param url
+ */
+export declare function getOrigin(url: string): string;
+/**
  * 获取 pathname
  * @param url
  */
@@ -38,3 +43,9 @@ export declare function getHash(url: string): string;
  * @param query query
  */
 export declare function generatePath(url?: string | Record<string, any>, params?: Record<string, any>, query?: Record<string, any>): string;
+/**
+ * 传入json格式对象更新url
+ * @param obj 待解析网址
+ * @param search search
+ */
+export declare function updateUrl(url: string, query: Record<string, any>): string;

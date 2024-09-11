@@ -41,6 +41,19 @@ export function updateSearch(obj: Record<string, string | number | undefined>, s
 }
 
 /**
+ * 获取 origin
+ * @param url
+ */
+export function getOrigin(url: string): string {
+    const reg = /^(http:|https:)*\/\/.*?\//;
+    const matches = url.match(reg);
+    if (matches) {
+        return matches[0].replace(/\/$/, '');
+    }
+    return '';
+}
+
+/**
  * 获取 pathname
  * @param url
  */
@@ -109,4 +122,17 @@ export function generatePath(
     }
 
     return pathname + search + getHash(url);
+}
+
+/**
+ * 传入json格式对象更新url
+ * @param obj 待解析网址
+ * @param search search
+ */
+export function updateUrl(url: string, query: Record<string, any>) {
+    const origin = getOrigin(url);
+    const pathname: string = getPathname(url.replace(origin, ''));
+    const search = updateSearch(query, getSearch(url));
+    const hash = getHash(url);
+    return origin + pathname + search + hash;
 }
