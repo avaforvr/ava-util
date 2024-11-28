@@ -18,7 +18,7 @@ export declare function clone<T>(origin: T): T;
  * @param target 合并后的对象
  * @param args 剩余参数
  */
-export declare function merge<T = Array<any> | Record<string | number, any>>(target: T, ...args: T[]): T;
+export declare function merge<T = Record<string, any>>(target: Partial<T>, ...args: Partial<T>[]): T;
 /**
  * 获取 json 格式的对象
  * @param data

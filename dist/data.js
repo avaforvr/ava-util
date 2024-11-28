@@ -38,19 +38,17 @@ exports.getDataType = getDataType;
  * @param origin 要克隆的对象
  */
 function clone(origin) {
-    var cloned;
+    var cloned = origin;
     var type = getDataType(origin);
     if (type === 'array' || type === 'json') {
-        cloned = type === 'array' ? [] : {};
+        cloned = (type === 'array' ? [] : {});
+        // @ts-ignore
         Object.keys(origin).forEach(function (key) {
             var nextType = getDataType(origin[key]);
             cloned[key] = nextType === 'array' || nextType === 'json'
                 ? clone(origin[key])
                 : origin[key];
         });
-    }
-    else {
-        cloned = origin;
     }
     return cloned;
 }
@@ -65,26 +63,27 @@ function merge(target) {
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
     }
-    target = target || {};
     var targetType = getDataType(target);
+    target = clone(target);
     args.forEach(function (arg) {
         // target 和 arg 数据类型不一致时直接赋值
         if (getDataType(arg) !== targetType) {
             target = clone(arg);
         }
         else {
-            Object.keys(arg).forEach(function (key) {
-                if (isJson(arg[key])) {
+            Object.entries(arg).forEach(function (_a) {
+                var key = _a[0], value = _a[1];
+                if (isJson(value)) {
                     // Json对象
-                    target[key] = merge(target[key], arg[key]);
+                    target[key] = merge(target[key], value);
                 }
-                else if (Array.isArray(arg[key])) {
+                else if (Array.isArray(value)) {
                     // 普通数组
-                    target[key] = merge([], arg[key]);
+                    target[key] = merge(value);
                 }
                 else {
                     // 其它对象不拷贝
-                    target[key] = arg[key];
+                    target[key] = value;
                 }
             });
         }
