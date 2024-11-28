@@ -36,18 +36,17 @@ export function getDataType(param: any): string {
  * @param origin 要克隆的对象
  */
 export function clone<T>(origin: T): T {
-    let cloned: any;
+    let cloned = origin;
     const type = getDataType(origin);
     if (type === 'array' || type === 'json') {
-        cloned = type === 'array' ? [] : {};
-        Object.keys(origin as Object).forEach(key => {
+        cloned = (type === 'array' ? [] : {}) as T;
+        // @ts-ignore
+        Object.keys(origin).forEach(key => {
             const nextType = getDataType(origin[key]);
             cloned[key] = nextType === 'array' || nextType === 'json'
                 ? clone(origin[key])
                 : origin[key];
         });
-    } else {
-        cloned = origin;
     }
     return cloned;
 }
@@ -57,30 +56,31 @@ export function clone<T>(origin: T): T {
  * @param target 合并后的对象
  * @param args 剩余参数
  */
-export function merge<T = Array<any> | Record<string | number, any>>(target: T, ...args: T[]): T {
-    target = target || {} as T;
+export function merge<T = Record<string, any>>(target: Partial<T>, ...args: Partial<T>[]): T {
     const targetType = getDataType(target);
+    target = clone(target);
 
     args.forEach(arg => {
         // target 和 arg 数据类型不一致时直接赋值
         if (getDataType(arg) !== targetType) {
             target = clone(arg);
         } else {
-            Object.keys(arg as Object).forEach(key => {
-                if (isJson(arg[key])) {
+            Object.entries(arg).forEach(([key, value]) => {
+                if (isJson(value)) {
                     // Json对象
-                    target[key] = merge(target[key], arg[key]);
-                } else if (Array.isArray(arg[key])) {
+                    target[key] = merge(target[key], value);
+                } else if (Array.isArray(value)) {
                     // 普通数组
-                    target[key] = merge([], arg[key]);
+                    target[key] = merge(value);
                 } else {
                     // 其它对象不拷贝
-                    target[key] = arg[key];
+                    target[key] = value;
                 }
             });
         }
     });
-    return target;
+
+    return target as T;
 }
 
 /**
