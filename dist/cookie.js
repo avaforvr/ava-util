@@ -16,13 +16,11 @@ function getDomain() {
         // 一级域名直接返回
         return domain;
     }
-    else if (/^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}){2,}$/.test(domain)) {
+    else if (/^www\./.test(domain) && /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}){2,}$/.test(domain)) {
         // 二级域名去掉倒数第二个点前面的部分
         return domain.replace(/^(.*)(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})$/, '$2');
     }
-    else {
-        return '';
-    }
+    return domain;
 }
 /**
  * Set a cookie in browser.
