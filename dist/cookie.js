@@ -1,15 +1,10 @@
 "use strict";
-/**
- * 设置和获取cookie
- * @author yywang1
- */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.delCookie = exports.getCookie = exports.setCookie = void 0;
 /**
  * Get domain for cookie.
  * @ignore
  */
-/* istanbul ignore next */
 function getDomain() {
     var domain = window.location.host;
     if (/^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}$/.test(domain)) {
@@ -36,6 +31,7 @@ function setCookie(name, value, options) {
     var expires = 365;
     var samesite = 'lax';
     var secure = false;
+    var crossDomain = false;
     if (typeof options === 'number') {
         expires = options;
     }
@@ -58,6 +54,9 @@ function setCookie(name, value, options) {
         else if (options.secure !== void 0) {
             secure = options.secure;
         }
+        if (options.crossDomain) {
+            crossDomain = options.crossDomain;
+        }
     }
     var cookie = name + '=' + encodeURIComponent(value + '');
     cookie += ';path=/';
@@ -65,16 +64,16 @@ function setCookie(name, value, options) {
     expiresDate.setTime(expiresDate.getTime() + (expires * 24 * 3600 * 1000));
     var expiresTrans = expiresDate.toUTCString();
     cookie += ';expires=' + expiresTrans;
-    var domain = getDomain();
-    /* istanbul ignore if */
-    if (domain !== '') {
-        cookie += ';domain=' + getDomain();
+    if (crossDomain) {
+        var domain = getDomain();
+        if (domain !== '') {
+            cookie += ';domain=' + getDomain();
+        }
     }
     cookie += ';samesite=' + samesite;
     if (secure) {
         cookie += ';secure';
     }
-    /* istanbul ignore next */
     try {
         document.cookie = cookie;
         return true;
@@ -96,13 +95,10 @@ function getCookie(name) {
         cookies = document.cookie;
     }
     catch (err) {
-        /* istanbul ignore next */
         console.log('cookie is disabled');
     }
-    /* istanbul ignore else */
     if (cookies.length > 0) {
         var begin = cookies.indexOf(name + '=');
-        /* istanbul ignore else */
         if (begin !== -1) {
             begin += name.length + 1;
             var end = cookies.indexOf(';', begin) === -1 ? cookies.length : cookies.indexOf(';', begin);

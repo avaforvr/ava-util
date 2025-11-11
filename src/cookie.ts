@@ -2,19 +2,17 @@
  * 设置和获取cookie
  * @author yywang1
  */
-
 interface CookieOption {
     expires?: number; // 距离当前的有效天数
     samesite?: string; // SameSite属性
     secure?: boolean; // Secure属性
+    crossDomain?: boolean; // 是否支持跨域
 }
 
 /**
  * Get domain for cookie.
  * @ignore
  */
-
-/* istanbul ignore next */
 function getDomain(): string {
     const domain = window.location.host;
     if (/^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}$/.test(domain)) {
@@ -40,6 +38,7 @@ export function setCookie(name: string, value: number | string, options: number 
     let expires: number = 365;
     let samesite: string = 'lax';
     let secure: boolean = false;
+    let crossDomain: boolean = false;
 
     if (typeof options === 'number') {
         expires = options;
@@ -61,6 +60,9 @@ export function setCookie(name: string, value: number | string, options: number 
         } else if (options.secure !== void 0) {
             secure = options.secure;
         }
+        if (options.crossDomain) {
+            crossDomain = options.crossDomain;
+        }
     }
 
     let cookie = name + '=' + encodeURIComponent(value + '');
@@ -71,19 +73,20 @@ export function setCookie(name: string, value: number | string, options: number 
     const expiresTrans = expiresDate.toUTCString();
     cookie += ';expires=' + expiresTrans;
 
-    const domain = getDomain();
-
-    /* istanbul ignore if */
-    if (domain !== '') {
-        cookie += ';domain=' + getDomain();
+    if (crossDomain) {
+        const domain = getDomain();
+        if (domain !== '') {
+            cookie += ';domain=' + getDomain();
+        }
     }
+
 
     cookie += ';samesite=' + samesite;
 
     if (secure) {
         cookie += ';secure';
     }
-    /* istanbul ignore next */
+
     try {
         document.cookie = cookie;
         return true;
@@ -103,13 +106,10 @@ export function getCookie(name: string): string | undefined {
     try {
         cookies = document.cookie;
     } catch (err) {
-        /* istanbul ignore next */
         console.log('cookie is disabled');
     }
-    /* istanbul ignore else */
     if (cookies.length > 0) {
         let begin = cookies.indexOf(name + '=');
-        /* istanbul ignore else */
         if (begin !== -1) {
             begin += name.length + 1;
             const end = cookies.indexOf(';', begin) === -1 ? cookies.length : cookies.indexOf(';', begin);

@@ -6,6 +6,7 @@ interface CookieOption {
     expires?: number;
     samesite?: string;
     secure?: boolean;
+    crossDomain?: boolean;
 }
 /**
  * Set a cookie in browser.
