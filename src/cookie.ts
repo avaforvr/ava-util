@@ -15,13 +15,13 @@ interface CookieOption {
  */
 function getDomain(): string {
     const domain = window.location.host;
-    if (/^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}$/.test(domain)) {
-        // 一级域名直接返回
-        return domain;
-    } else if (/^www\./.test(domain) && /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}){2,}$/.test(domain)) {
-        // 二级域名去掉倒数第二个点前面的部分
-        return domain.replace(/^(.*)(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})$/, '$2');
-    }
+    // if (/^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}$/.test(domain)) {
+    //     // 一级域名直接返回
+    //     return domain;
+    // } else if (/^www\./.test(domain) && /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}){2,}$/.test(domain)) {
+    //     // 二级域名去掉倒数第二个点前面的部分
+    //     return domain.replace(/^(.*)(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62}\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})$/, '$2');
+    // }
     return domain.replace(/:.*/, '');
 }
 
@@ -35,7 +35,7 @@ export function setCookie(name: string, value: number | string, options: number 
     if (name.length === 0) {
         return false;
     }
-    let expires: number = 365;
+    let expires: number = 30; // 默认保存30天
     let samesite: string = 'lax';
     let secure: boolean = false;
     let crossDomain: boolean = false;
