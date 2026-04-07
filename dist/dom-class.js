@@ -34,6 +34,9 @@ exports.removeClass = removeClass;
  * @param cls class名
  */
 function hasClass(obj, cls) {
+    if (!obj.className) {
+        return false;
+    }
     var objClass = obj.className.trim().replace(/(\s+)/gi, ' ');
     objClass = ' ' + objClass + ' '; // 首尾各加一个空格
     return objClass.indexOf(' ' + cls + ' ') !== -1;

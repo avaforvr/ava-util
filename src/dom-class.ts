@@ -31,6 +31,9 @@ export function removeClass(obj, cls, notCheckExist) {
  * @param cls class名
  */
 export function hasClass(obj, cls) {
+    if (!obj.className) {
+        return false;
+    }
     let objClass = obj.className.trim().replace(/(\s+)/gi, ' ');
     objClass = ' ' + objClass + ' '; // 首尾各加一个空格
     return objClass.indexOf(' ' + cls + ' ') !== -1;

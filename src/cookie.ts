@@ -80,7 +80,6 @@ export function setCookie(name: string, value: number | string, options: number 
         }
     }
 
-
     cookie += ';samesite=' + samesite;
 
     if (secure) {
